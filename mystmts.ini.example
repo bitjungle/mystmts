@@ -1,0 +1,29 @@
+; Do NOT store this file inside the web server root!
+[db]
+driver = mysql
+host = localhost
+dbname = dbNameHere
+user = userNameHere
+passwd = yourPasswordHere
+[page]
+lang = nb
+root_path = /
+about = Text for the modal about-box. Do not be afraid to make this line very long! :-)
+img_post_path = ./img/posts/
+img_default = default.png
+title_default = Your front page title here
+owner_name = Your name here
+owner_url = https://your-home-page.com
+license_pretext = Dette verk er lisensiert under en
+license_name = Creative Commons Navngivelse 4.0 Internasjonal lisens
+license_url = https://creativecommons.org/licenses/by-sa/4.0/deed.no
+license_img = ./img/license/CC-BY-88x31.png
+[security]
+pwd_hash = dd1998947de30e01f06142f90a92938d59cd243c
+[cookie]
+expires = 2592000
+path = /
+domain = .bitjungle.net
+secure = true
+httponly = true
+samesite = 'Strict'

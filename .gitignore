@@ -1,0 +1,8 @@
+.DS_Store
+_system/
+db/*
+!db/mystmts.sql
+img/posts/*
+!img/posts/default.png
+_*.php
+mystmts.ini

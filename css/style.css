@@ -1,0 +1,35 @@
+.statement-header {
+    font-size: large;
+    color: yellow;
+    background-color: aqua;
+}
+h1 {
+    font-size: large;
+}
+/* 
+h2 {
+    font-size: large;
+    font-weight: bold;
+}
+h3 {
+    font-size: medium;
+} 
+*/
+hr {
+    color: silver;
+    border: 10px solid silver;
+    border-radius: 5px;
+}
+li a {
+    text-decoration: none;
+}
+/* 
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+main {
+
+} 
+*/
