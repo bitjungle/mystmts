@@ -7,11 +7,11 @@
  * See http://www.gnu.org/licenses/gpl-3.0.html 
  */
 require_once 'inc/Settings.php';
-require_once 'inc/DB.php';
+require_once 'inc/Database.php';
 $settings = new Settings();
 //$settings = new Settings('../bitjunglenet-settings.ini');
 try {
-    $db = new DB($settings->db);
+    $db = new Database($settings->db);
     if (strlen($_POST['str']) > 0) {
         echo json_encode($db->search($_POST['str']));
     } else {

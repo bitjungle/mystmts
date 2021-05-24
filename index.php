@@ -7,7 +7,7 @@
  */
 ini_set('display_errors', 1); error_reporting(E_ALL);//REMOVE IN PRODUCTION
 require_once 'inc/Settings.php';
-require_once 'inc/DB.php';
+require_once 'inc/Database.php';
 require_once 'inc/Page.php';
 require_once 'inc/Parsedown.php';
 
@@ -23,7 +23,7 @@ if (isset($_COOKIE['submitkey'])
 }
 
 try {
-    $db = new DB($settings->db);
+    $db = new Database($settings->db);
 } catch (exception $e) {
     http_response_code(503); // Service Unavailable
     exit($e->getMessage());
