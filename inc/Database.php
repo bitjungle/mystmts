@@ -109,7 +109,7 @@ class Database extends PDO
                           :value_url, 
                           now(), now(), 0);';
         $stmt = $this->prepare($query);
-        return $stmt->execute(
+        $ok = $stmt->execute(
             ['value_name' => $arr['case_name'],
             'value_pre' => $arr['preamble'],
             'value_stmt' => $arr['statement_txt'],
@@ -117,6 +117,11 @@ class Database extends PDO
             'value_date' => $arr['case_date'],
             'value_url' => $arr['case_doc_url']]
         );
+        if ($ok) {
+            return intval($this->lastInsertId());
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -138,7 +143,7 @@ class Database extends PDO
                     `changed_date` = now()
                   WHERE `id` = :value_id;';
         $stmt = $this->prepare($query);
-        return $stmt->execute(
+        $ok = $stmt->execute(
             ['value_name' => $arr['case_name'],
             'value_pre' => $arr['preamble'],
             'value_stmt' => $arr['statement_txt'],
@@ -147,6 +152,11 @@ class Database extends PDO
             'value_url' => $arr['case_doc_url'],
             'value_id' => $arr['id']]
         );
+        if ($ok) {
+            return intval($arr['id']);
+        } else {
+            return false;
+        }
     }
 }
 ?>
