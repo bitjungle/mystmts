@@ -217,7 +217,15 @@ if (isset($_POST) && !empty($_POST)) {
                 Bildefil:
                 <input name="case_img" 
                        id="case_img" 
-                       type="file"><br>
+                       type="file">
+            </label>
+            <label>
+                Bilde opphavsperson:
+                <input name="case_img_attr" 
+                       id="case_img_attr" 
+                       size="50"
+                       type="text"
+                       <?php if ($id) echo "value=\"{$s['img_attr']}\""; ?>><br>
             </label>
             <?php if ($id) {
                 echo "<input name=\"img_file_name\"  

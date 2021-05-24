@@ -1,11 +1,12 @@
 SET NAMES utf8mb4;
 
-CREATE TABLE `mystmts2` (
+CREATE TABLE `mystmts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `case_name` varchar(2000) NOT NULL,
   `preamble` varchar(2000) NOT NULL,
   `statement_txt` text NOT NULL,
   `img_file_name` varchar(255) NOT NULL DEFAULT 'default.png',
+  `img_attrib` varchar(255) NOT NULL,
   `case_date` date NOT NULL,
   `case_doc_url` varchar(2000) NOT NULL,
   `added_date` timestamp NOT NULL DEFAULT current_timestamp(),
