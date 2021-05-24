@@ -11,6 +11,7 @@ class Page
     public $title = '';
     public $description = '';
     public $image = '';
+    public $image_attrib = '';
     public $content = '';
 
     /**

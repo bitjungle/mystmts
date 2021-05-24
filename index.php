@@ -54,6 +54,7 @@ if (isset($_GET['id']) && strlen($_GET['id']) > 0 && is_numeric($_GET['id'])) {
                        {$parsedown->text($statement['statement_txt'])}</div>";
     if (strlen($statement['img_file_name']) > 4) {
         $page->image = $settings->page['img_post_path'] . $statement['img_file_name'];
+        $page->image_attrib = $statement['img_attrib'];
     } else {
         $page->image = $settings->page['img_default'];
     }
@@ -61,6 +62,7 @@ if (isset($_GET['id']) && strlen($_GET['id']) > 0 && is_numeric($_GET['id'])) {
                         <a href=\"{$page->image}\">
                         <img src=\"{$page->image}\" 
                         alt=\"Bilde\" class=\"w3-image w3-right w3-mobile\" 
+                        title=\"{$page->image_attrib}\" 
                         style=\"width:100%;max-width:800px;\"></a></div>";
     $page->content .= "</div>\n";
 } else {
