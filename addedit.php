@@ -22,7 +22,7 @@ $settings = new Settings();
  * 
  * @return string
  */
-function make_message($success, $msg = 'Innlegget ble lagret.') 
+function make_message($success, $msg) 
 {
     if ($success) {
         $color = 'w3-green';
@@ -48,18 +48,19 @@ function make_message($success, $msg = 'Innlegget ble lagret.')
  * @param string $default_img
  * @param array $cookie
  * 
- * @return string 
+ * @return array (bool, string) 
  */
 function handle_post($p, $f, $db, $savekey, $img_path, $default_img, $cookie) 
 {
     if (!isset($p['submitkey']) || sha1($p['submitkey']) != $savekey) {
-        return make_message(false, '<p>Nøkkelordet var feil!</p>');
+        return array(false, '<p>Nøkkelordet var feil!</p>');
     } else {
-        // Store in a cookie for 30 days
+        // Store the key in a cookie for 30 days
         setcookie('submitkey', $savekey, $cookie);
     }
 
     if (isset($f['case_img']['name']) && !empty($f['case_img']['name'])) {
+        //A file was uploaded
         $p['img_file_name'] = $f['case_img']['name'];
         $uploadfile = $img_path . basename($f['case_img']['name']);
         $img_uploaded = move_uploaded_file(
@@ -73,17 +74,17 @@ function handle_post($p, $f, $db, $savekey, $img_path, $default_img, $cookie)
         $img_uploaded = true;
     }
     if (isset($p['id']) && is_numeric($p['id'])) {
-        $post_stored = $db->update($p);
+        $post_status = $db->update($p);
     } else {
-        $post_stored = $db->add($p);
+        $post_status = $db->add($p);
     }
-    if ($post_stored && $img_uploaded) {
-        return make_message(true);
+    if ($post_status && $img_uploaded) {
+        return array($post_status, '<p>Innlegget ble lagret.</p>');
     } else {
         $f = '<p>Det skjedde en feil ved lagring av innlegget.</p>';
-        if (!$post_stored) $f .= '<p>Innlegget ble ikke lagret i databasen!</p>';
+        if (!$post_status) $f .= '<p>Innlegget ble ikke lagret i databasen!</p>';
         if (!$img_uploaded) $f .= '<p>Bildet ble ikke lagret!</p>';
-        return make_message(false, $f);
+        return array(false, $f);
     }
 }
 
@@ -101,18 +102,20 @@ $page->title = "Legg til nytt innlegg";
 
 $id = false;
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    //The user requested to load a statement
     $id = $_GET['id'];
-    $s = $db->getStatement($id);
+    $s = $db->getStatement($id); // Load the requested statement
     if ($s) {
         $page->title = "Rediger innlegg";
     } else {
-        $id = false; //Did not find a statement with the given id
+        $id = false; // Did not find a statement with the given id
     }
 }
 
 $statusbar = '';
 if (isset($_POST) && !empty($_POST)) {
-    $statusbar = handle_post(
+    // The user posted a statement, try to save it
+    $status = handle_post(
         $_POST, 
         $_FILES,
         $db,
@@ -121,6 +124,12 @@ if (isset($_POST) && !empty($_POST)) {
         $settings->page['img_default'],
         $settings->cookie
     );
+    $statusbar = make_message($status[0], $status[1]);
+    if (is_int($status[0])) {
+        // Load the statement that was saved
+        $id = $status[0];
+        $s = $db->getStatement($id);
+    }
 }
 
 ?>
