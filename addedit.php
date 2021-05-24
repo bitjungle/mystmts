@@ -53,21 +53,28 @@ function make_message($success, $msg)
 function handle_post($p, $f, $db, $savekey, $img_path, $default_img, $cookie) 
 {
     if (!isset($p['submitkey']) || sha1($p['submitkey']) != $savekey) {
+        // I do not trust this user, and refuse to save the statement
         return array(false, '<p>Nøkkelordet var feil!</p>');
     } else {
         // Store the key in a cookie for 30 days
         setcookie('submitkey', $savekey, $cookie);
     }
-
     if (isset($f['case_img']['name']) && !empty($f['case_img']['name'])) {
-        //A file was uploaded
-        $p['img_file_name'] = $f['case_img']['name'];
-        $uploadfile = $img_path . basename($f['case_img']['name']);
-        $img_uploaded = move_uploaded_file(
-            $f['case_img']['tmp_name'], 
-            $uploadfile
-        );
+        // A file was uploaded
+        $is_image = strpos(mime_content_type($f['case_img']['tmp_name']), 'image/');
+        if (!is_int($is_image)) {
+            // I don't trust that file to be an image
+            $img_uploaded = false;
+        } else {
+            $uploadfile = $img_path . basename($f['case_img']['name']);
+            $img_uploaded = move_uploaded_file(
+                $f['case_img']['tmp_name'], 
+                $uploadfile
+            );
+            $p['img_file_name'] = $f['case_img']['name'];
+        }
     } else {
+        // Keep old image file or set to default image
         if (!isset($p['img_file_name'])) {
             $p['img_file_name'] = $default_img;
         }
