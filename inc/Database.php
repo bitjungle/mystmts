@@ -98,7 +98,7 @@ class Database extends PDO
                           `preamble`, 
                           `statement_txt`, 
                           `img_file_name`, 
-                          `img_attr`, 
+                          `img_attrib`, 
                           `case_date`, 
                           `case_doc_url`, 
                           `added_date`, `changed_date`, `deleted`)
@@ -106,7 +106,7 @@ class Database extends PDO
                           :value_pre, 
                           :value_stmt, 
                           :value_img, 
-                          :value_img_attr, 
+                          :value_img_attrib, 
                           :value_date, 
                           :value_url, 
                           now(), now(), 0);';
@@ -116,7 +116,7 @@ class Database extends PDO
             'value_pre' => $arr['preamble'],
             'value_stmt' => $arr['statement_txt'],
             'value_img' => $arr['img_file_name'],
-            'value_img_attr' => $arr['case_img_attr'],
+            'value_img_attrib' => $arr['case_img_attrib'],
             'value_date' => $arr['case_date'],
             'value_url' => $arr['case_doc_url']]
         );

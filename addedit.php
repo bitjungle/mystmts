@@ -127,7 +127,7 @@ if (isset($_POST) && !empty($_POST)) {
         $_FILES,
         $db,
         $settings->security['pwd_hash'],
-        $settings->page['img_post_path'],
+        $settings->root_dir . $settings->page['img_post_path'],
         $settings->page['img_default'],
         $settings->cookie
     );
@@ -210,7 +210,7 @@ if (isset($_POST) && !empty($_POST)) {
                        id="case_doc_url" 
                        type="url" 
                        class="w3-input"
-                       <?php if ($id) echo "value=\"{$s['case_doc_url']}\""; ?>><br>
+                       <?php if ($id) echo "value=\"{$s['case_doc_url']}\""; ?>><br>    
             </label>
             <input type="hidden" name="MAX_FILE_SIZE" value="2000000" /><!-- 2 MB -->
             <label>
