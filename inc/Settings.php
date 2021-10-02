@@ -30,6 +30,9 @@ class Settings
         $this->cookie['expires'] = time() + $this->cookie['expires'];
 
         $this->root_dir = dirname(dirname(__FILE__)) . '/';
+        $this->protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+        $this->app_url = $this->protocol . '://' .  $_SERVER['HTTP_HOST'] . $this->page['app_path'];
+        $this->page_url = $this->protocol . '://' .  $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     }
 
 }

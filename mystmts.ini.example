@@ -7,10 +7,10 @@ user = userNameHere
 passwd = yourPasswordHere
 [page]
 lang = nb
-root_path = /
+app_path = /
 about = Text for the modal about-box. Do not be afraid to make this line very long! :-)
 img_post_path = ./img/posts/
-img_default = default.png
+img_default = ./img/posts/default.png
 title_default = Your front page title here
 owner_name = Your name here
 owner_url = https://your-home-page.com

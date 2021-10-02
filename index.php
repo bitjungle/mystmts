@@ -99,8 +99,9 @@ if (isset($_GET['id']) && strlen($_GET['id']) > 0 && is_numeric($_GET['id'])) {
     <meta property="og:title" content="<?php echo $page->title; ?>" />
     <meta property="og:description" content="<?php echo $page->description; ?>" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="<?php echo $page->image; ?>" />
-    <meta property="og:url" content="<?php echo $settings->page['owner_url']; ?>" />
+    <meta property="og:url" content="<?php echo $settings->page_url; ?>" />
+    <meta property="og:image" content="<?php echo $settings->app_url . $page->image; ?>" />
+    <!-- <meta property="og:image:type" content="image/jpeg" /> -->
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="./css/w3-colors-highway.css">
     <link rel="stylesheet" href="./css/style.css">
@@ -116,7 +117,7 @@ if (isset($_GET['id']) && strlen($_GET['id']) > 0 && is_numeric($_GET['id'])) {
     <nav id="standardNavbar" class="w3-container w3-bar w3-xlarge w3-padding-32 w3-highway-red">
         <div class="w3-container">
             <span id="homelink">
-                <a href="<?php echo $settings->page['root_path']?>" style="text-decoration: none;">
+                <a href="<?php echo $settings->app_url; ?>" style="text-decoration: none;">
                     <img src="./img/fist-50x50.png" alt="Home" style="width: 50px; height: 50px;">
                 </a>
             </span>
