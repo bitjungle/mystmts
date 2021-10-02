@@ -162,7 +162,7 @@ if (isset($_POST) && !empty($_POST)) {
     <nav id="standardNavbar" class="w3-container w3-bar w3-xlarge w3-padding-32 w3-highway-red">
         <div class="w3-container">
             <span id="homelink">
-                <a href="<?php echo $settings->page['root_path']?>"  style="text-decoration: none;">
+                <a href="<?php echo $settings->app_url; ?>"  style="text-decoration: none;">
                     <img src="./img/fist-50x50.png" alt="Home" style="width: 50px; height: 50px;">
                 </a>
             </span>
