@@ -8,8 +8,10 @@
  */
 require_once 'inc/Settings.php';
 require_once 'inc/Database.php';
-$settings = new Settings();
-//$settings = new Settings('../bitjunglenet-settings.ini');
+
+header('Content-Type: application/json');
+
+$settings = new Settings('path/to/settings.ini');
 try {
     $db = new Database($settings->db);
     if (strlen($_POST['str']) > 0) {
