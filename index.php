@@ -121,7 +121,7 @@ if (isset($_GET['id']) && strlen($_GET['id']) > 0 && is_numeric($_GET['id'])) {
       "editor": "<?php echo $settings->page['owner_name']; ?>", 
       "genre": "politics", 
       "url": "<?php echo $settings->page_url; ?>",
-      "datePublished": "<?php echo $statement['case_date']; ?>",
+      "datePublished": "<?php echo isset($statement['case_date']) ? $statement['case_date'] : date('Y-m-d'); ?>",
       "description": "<?php echo $page->description; ?>",
     }
     </script>
