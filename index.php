@@ -1,6 +1,6 @@
 <?php
 /**
- * Index list and endry display for mystmts
+ * Index list and entry display for mystmts
  * 
  * @author  Rune Mathisen <devel@bitjungle.com>
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU GPLv3
@@ -11,10 +11,11 @@ require_once 'inc/Database.php';
 require_once 'inc/Page.php';
 require_once 'inc/Parsedown.php';
 
-$settings = new Settings();
-//$settings = new Settings('../bitjunglenet-settings.ini');
+//$settings = new Settings();
+$settings = new Settings('../../bitjunglenet-settings.ini');
 
-if (isset($_COOKIE['submitkey']) 
+if (
+    isset($_COOKIE['submitkey']) 
     &&  $_COOKIE['submitkey'] == $settings->security['pwd_hash']
 ) {
     $make_edit_link = true;
@@ -112,6 +113,18 @@ if (isset($_GET['id']) && strlen($_GET['id']) > 0 && is_numeric($_GET['id'])) {
     <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/icon-16x16.png">
     <link rel="manifest" href="./site.webmanifest"><!-- https://manifest-gen.netlify.app -->
     <script src="./js/script.js" defer></script>
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", 
+      "@type": "BlogPosting",
+      "headline": "<?php echo $page->title; ?>",
+      "image": "<?php echo $settings->app_url . $page->image; ?>",
+      "editor": "<?php echo $settings->page['owner_name']; ?>", 
+      "genre": "politics", 
+      "url": "<?php echo $settings->page_url; ?>",
+      "datePublished": "<?php echo $statement['case_date']; ?>",
+      "description": "<?php echo $page->description; ?>",
+    }
+    </script>
 </head>
 <body class="w3-black">
     <nav id="standardNavbar" class="w3-container w3-bar w3-xlarge w3-padding-32 w3-highway-red">
